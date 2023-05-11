@@ -16,12 +16,12 @@
     }
 
     async function getUser() {
-        const res = await fetch('/auth/me');
+        const res = await fetch('/monban/me');
         user = await res.json();
     }
 
     async function logout() {
-        await fetch('/auth/logout');
+        await fetch('/monban/logout');
         user = undefined;
     }
 </script>
@@ -29,7 +29,7 @@
 <h1>SvelteKit Google Auth</h1>
 
 {#if user === undefined}
-    <a href="/auth/google">Login with Google</a>
+    <a href="/monban/login/google">Login with Google</a>
 {:else}
     <p>{user.name}</p>
     <button on:click={logout}>Logout</button>
