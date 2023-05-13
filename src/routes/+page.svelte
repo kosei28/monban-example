@@ -30,6 +30,7 @@
 {#if session === undefined}
     <button on:click={signIn}>Login with Google</button>
 {:else}
-    <p>{session.user.name}</p>
+    <div>{session.user.name}</div>
+    <div>{session.user.email}</div>
     <button on:click={signOut}>Logout</button>
 {/if}
