@@ -1,36 +1,46 @@
 <script lang="ts">
     import { browser } from '$app/environment';
-    import type { SessionUser } from '$lib/monban';
+    import type { MyMonban, SessionUser } from '$lib/monban';
     import type { Session } from 'monban';
-    import { googleSignIn } from 'monban/providers/google/client';
+    import { MonbanClient } from 'monban/client';
+    import { GoogleClient } from 'monban/providers/google/client';
+
+    const providerClients = {
+        google: new GoogleClient()
+    };
+
+    const monbanClient = new MonbanClient<MyMonban, typeof providerClients>(
+        '/monban',
+        providerClients
+    );
 
     let session: Session<SessionUser> | undefined = undefined;
 
     if (browser) {
-        getSession();
-    }
-
-    async function getSession() {
-        const res = await fetch('/monban/me/session');
-        session = await res.json();
-    }
-
-    async function signIn() {
-        await googleSignIn('/monban');
-    }
-
-    async function signOut() {
-        await fetch('/monban/signout');
-        session = undefined;
+        monbanClient.onSessionChange((newSession) => {
+            session = newSession;
+        });
     }
 </script>
 
 <h1>SvelteKit Google Auth</h1>
 
 {#if session === undefined}
-    <button on:click={signIn}>Login with Google</button>
+    <button
+        on:click={() => {
+            monbanClient.signIn.google();
+        }}
+    >
+        Login with Google
+    </button>
 {:else}
     <div>{session.user.name}</div>
     <div>{session.user.email}</div>
-    <button on:click={signOut}>Logout</button>
+    <button
+        on:click={() => {
+            monbanClient.signOut();
+        }}
+    >
+        Logout
+    </button>
 {/if}

@@ -33,3 +33,5 @@ export const monban = new Monban(
         }
     }
 );
+
+export type MyMonban = typeof monban;
