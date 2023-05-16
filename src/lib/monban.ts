@@ -18,13 +18,13 @@ export const monban = new Monban(
     {
         secret: JWT_SECRET,
         callback: {
-            async createSession(user, accountInfo) {
+            async createSession(userId, authInfo) {
                 const session: Session<SessionUser> = {
                     id: undefined,
                     user: {
-                        id: user.id,
-                        name: accountInfo.name,
-                        email: accountInfo.email
+                        id: userId,
+                        name: authInfo.name,
+                        email: authInfo.email
                     }
                 };
 
