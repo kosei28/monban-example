@@ -1,7 +1,7 @@
 <script lang="ts">
     import { browser } from '$app/environment';
     import type { MyMonban, SessionUser } from '$lib/monban';
-    import type { Session } from 'monban';
+    import type { TokenPayloadInput } from 'monban';
     import { MonbanClient } from 'monban/client';
     import { GoogleClient } from 'monban/providers/google/client';
 
@@ -14,7 +14,7 @@
         providerClients
     );
 
-    let session: Session<SessionUser> | undefined = undefined;
+    let session: TokenPayloadInput<SessionUser> | undefined = undefined;
 
     if (browser) {
         monbanClient.onSessionChange((newSession) => {
