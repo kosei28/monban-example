@@ -1,6 +1,6 @@
 <script lang="ts">
     import { browser } from '$app/environment';
-    import type { MyMonban, SessionUser } from '$lib/monban';
+    import type { SessionUser } from '$lib/monban';
     import type { TokenPayloadInput } from 'monban';
     import { MonbanClient } from 'monban/client';
     import { GoogleClient } from 'monban/providers/google/client';
@@ -9,7 +9,7 @@
         google: new GoogleClient()
     };
 
-    const monbanClient = new MonbanClient<MyMonban, typeof providerClients>(
+    const monbanClient = new MonbanClient<SessionUser, typeof providerClients>(
         '/monban',
         providerClients
     );
