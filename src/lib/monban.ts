@@ -1,12 +1,6 @@
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, JWT_SECRET } from '$env/static/private';
-import { Monban, type TokenPayloadInput } from 'monban';
-import { GoogleProvider } from 'monban/providers/google/server';
-
-export type SessionUser = {
-    id: string;
-    name: string;
-    email: string;
-};
+import { Monban, type Session } from 'monban';
+import { GoogleProvider, type GoogleProfile } from 'monban/providers/google/server';
 
 export const monban = new Monban(
     {
@@ -18,18 +12,13 @@ export const monban = new Monban(
     {
         secret: JWT_SECRET,
         callback: {
-            async createToken(userId, authInfo) {
-                const payload: TokenPayloadInput<SessionUser> = {
-                    sub: userId,
-                    sessionId: undefined,
-                    user: {
-                        id: userId,
-                        name: authInfo.name,
-                        email: authInfo.email
-                    }
+            async createSession(profile) {
+                const session: Session<GoogleProfile> = {
+                    id: '',
+                    user: profile
                 };
 
-                return payload;
+                return session;
             }
         }
     }
