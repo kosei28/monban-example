@@ -11,8 +11,8 @@ export const monban = new Monban(
     },
     {
         secret: JWT_SECRET,
-        callback: {
-            async createSession(profile) {
+        callbacks: {
+            async session(profile) {
                 const session: Session<GoogleProfile> = {
                     id: '',
                     user: profile
