@@ -34,6 +34,9 @@
         Login with Google
     </button>
 {:else}
+    <div>
+        <img src={session.user.picture} alt={session.user.name} />
+    </div>
     <div>{session.user.name}</div>
     <div>{session.user.email}</div>
     <button
