@@ -14,10 +14,12 @@
         providerClients
     );
 
+    let loading = true;
     let session: Session<GoogleProfile> | undefined = undefined;
 
     if (browser) {
         monbanClient.onSessionChange((newSession) => {
+            loading = false;
             session = newSession;
         });
     }
@@ -25,7 +27,9 @@
 
 <h1>Monban Example</h1>
 
-{#if session === undefined}
+{#if loading}
+    <div>Loading</div>
+{:else if session === undefined}
     <button
         on:click={() => {
             monbanClient.signIn.google();
