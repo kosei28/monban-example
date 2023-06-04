@@ -30,6 +30,6 @@
     "type": "module",
     "dependencies": {
         "googleapis": "^118.0.0",
-        "monban": "github:kosei28/monban"
+        "monban": "^0.1.0"
     }
 }

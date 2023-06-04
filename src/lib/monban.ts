@@ -1,6 +1,6 @@
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, JWT_SECRET } from '$env/static/private';
-import { Monban, type Session } from 'monban';
-import { GoogleProvider, type GoogleProfile } from 'monban/providers/google/server';
+import { Monban } from 'monban';
+import { GoogleProvider } from 'monban/providers/google/server';
 
 export const monban = new Monban(
     {
@@ -12,13 +12,8 @@ export const monban = new Monban(
     {
         secret: JWT_SECRET,
         callbacks: {
-            async session(profile) {
-                const session: Session<GoogleProfile> = {
-                    id: '',
-                    user: profile
-                };
-
-                return session;
+            async authenticate(profile) {
+                return profile;
             }
         }
     }
