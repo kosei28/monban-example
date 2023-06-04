@@ -32,6 +32,6 @@
         "@monban/upstash-redis-adapter": "^0.1.1",
         "@upstash/redis": "^1.21.0",
         "googleapis": "^118.0.0",
-        "monban": "^0.1.2"
+        "monban": "^0.1.3"
     }
 }
