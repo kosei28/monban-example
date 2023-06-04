@@ -25,6 +25,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>Monban Example</title>
+</svelte:head>
+
 <h1>Monban Example</h1>
 
 {#if loading}
