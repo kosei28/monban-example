@@ -23,7 +23,7 @@
     }
 </script>
 
-<h1>SvelteKit Google Auth</h1>
+<h1>Monban Example</h1>
 
 {#if session === undefined}
     <button
