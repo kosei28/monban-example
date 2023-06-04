@@ -1,10 +1,19 @@
-import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, JWT_SECRET, REDIS_URL } from '$env/static/private';
-import { RedisAdapter } from '@monban/redis-adapter';
-import { Redis } from 'ioredis';
+import {
+    GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET,
+    JWT_SECRET,
+    UPSTASH_TOKEN,
+    UPSTASH_URL
+} from '$env/static/private';
+import { UpstashRedisAdapter } from '@monban/upstash-redis-adapter';
+import { Redis } from '@upstash/redis';
 import { Monban } from 'monban';
 import { GoogleProvider } from 'monban/providers/google/server';
 
-const redis = new Redis(REDIS_URL);
+const redis = new Redis({
+    url: UPSTASH_URL,
+    token: UPSTASH_TOKEN
+});
 
 export const monban = new Monban(
     {
@@ -16,7 +25,7 @@ export const monban = new Monban(
     {
         secret: JWT_SECRET,
         maxAge: 60 * 60 * 24 * 180,
-        adapter: new RedisAdapter({
+        adapter: new UpstashRedisAdapter({
             session: redis,
             userSession: redis
         }),
