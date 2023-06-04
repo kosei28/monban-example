@@ -6,7 +6,7 @@ import {
     UPSTASH_URL
 } from '$env/static/private';
 import { UpstashRedisAdapter } from '@monban/upstash-redis-adapter';
-import { Redis } from '@upstash/redis';
+import { Redis } from '@upstash/redis/cloudflare';
 import { Monban } from 'monban';
 import { GoogleProvider } from 'monban/providers/google/server';
 
@@ -41,5 +41,3 @@ export const monban = new Monban(
         }
     }
 );
-
-export type MyMonban = typeof monban;
