@@ -29,8 +29,8 @@
     },
     "type": "module",
     "dependencies": {
-        "@monban/upstash-redis-adapter": "^0.1.1",
+        "@monban/upstash-redis-adapter": "^0.1.2",
         "@upstash/redis": "^1.21.0",
-        "monban": "^0.1.6"
+        "monban": "^0.2.0"
     }
 }

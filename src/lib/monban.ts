@@ -30,7 +30,7 @@ export const monban = new Monban(
             userSession: redis
         }),
         callbacks: {
-            async authenticate(profile) {
+            async getUser(profile) {
                 return {
                     id: profile.id,
                     name: profile.name,
