@@ -15,6 +15,13 @@ const redis = new Redis({
     token: UPSTASH_TOKEN
 });
 
+export type User = {
+    id: string;
+    name: string;
+    email: string;
+    picture: string;
+};
+
 export const monban = new Monban(
     {
         google: new GoogleProvider({
@@ -31,12 +38,14 @@ export const monban = new Monban(
         }),
         callbacks: {
             async getUser(profile) {
-                return {
+                const user: User = {
                     id: profile.id,
                     name: profile.name,
                     email: profile.email,
                     picture: profile.picture
                 };
+
+                return user;
             }
         }
     }

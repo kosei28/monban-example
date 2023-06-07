@@ -1,21 +1,18 @@
 <script lang="ts">
     import { browser } from '$app/environment';
+    import type { User } from '$lib/monban';
     import type { Session } from 'monban';
     import { MonbanClient } from 'monban/client';
     import { GoogleClient } from 'monban/providers/google/client';
-    import type { GoogleProfile } from 'monban/providers/google/server';
 
     const providerClients = {
         google: new GoogleClient()
     };
 
-    const monbanClient = new MonbanClient<GoogleProfile, typeof providerClients>(
-        '/monban',
-        providerClients
-    );
+    const monbanClient = new MonbanClient<User, typeof providerClients>('/monban', providerClients);
 
     let loading = true;
-    let session: Session<GoogleProfile> | undefined = undefined;
+    let session: Session<User> | undefined = undefined;
 
     if (browser) {
         monbanClient.onSessionChange((newSession) => {
